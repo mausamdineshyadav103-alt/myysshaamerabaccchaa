@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love, Myshhaa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #ff4081;
+            --secondary: #e91e63;
+            --accent: #f8bbd9;
+            --light: #fff5f9;
+            --dark: #880e4f;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffcdd2, #f8bbd9, #e1bee7);
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heart-bg {
+            position: absolute;
+            font-size: 300px;
+            color: rgba(255, 64, 129, 0.05);
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            color: var(--dark);
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .name {
+            color: var(--primary);
+            font-size: 4.5rem;
+            font-weight: 800;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+            margin: 20px 0;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .name:hover {
+            transform: scale(1.05);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .heart-divider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .heart-divider i {
+            color: var(--primary);
+            margin: 0 15px;
+            font-size: 2rem;
+        }
+
+        .heart-divider .line {
+            height: 3px;
+            width: 100px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .love-button {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.3);
+            transition: all 0.3s ease;
+            min-width: 300px;
+            justify-content: center;
+        }
+
+        .love-button:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(233, 30, 99, 0.4);
+        }
+
+        .love-button:active {
+            transform: translateY(-5px);
+        }
+
+        .love-button i {
+            font-size: 1.8rem;
+        }
+
+        .hidden-message {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hidden-message h2 {
+            color: var(--dark);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hidden-message p {
+            line-height: 1.8;
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .love-list {
+            list-style-type: none;
+        }
+
+        .love-list li {
+            padding: 15px 0;
+            font-size: 1.2rem;
+            color: #555;
+            border-bottom: 1px dashed #ffcdd2;
+            display: flex;
+            align-items: center;
+        }
+
+        .love-list li i {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 1.3rem;
+            min-width: 30px;
+        }
+
+        .close-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px auto 0;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            background: var(--dark);
+            transform: scale(1.05);
+        }
+
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 8px solid white;
+            transition: transform 0.3s;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .countdown {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .countdown h2 {
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .countdown-box {
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 120px;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .countdown-box .number {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .countdown-box .label {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .heart-animation {
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.1); }
+            10% { transform: scale(1); }
+            15% { transform: scale(1.1); }
+            20% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .name { font-size: 3.5rem; }
+            .tagline { font-size: 1.2rem; }
+            .love-button { 
+                min-width: 250px; 
+                padding: 15px 30px;
+                font-size: 1.3rem;
+            }
+            .hidden-message { padding: 25px; }
+            .photo-frame { width: 150px; height: 150px; }
+            .countdown-box { min-width: 100px; }
+            .countdown-box .number { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .name { font-size: 2.8rem; }
+            .love-button { 
+                min-width: 100%; 
+                font-size: 1.2rem;
+            }
+            .photo-frame { width: 130px; height: 130px; }
+            .countdown-box { min-width: 80px; }
+            .countdown-box .number { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="heart-bg">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="header-content">
+                <h1>Mera bacchaa Myyysshhhaaa!! haayyyeeeee</h1>
+                <div class="name">Myshhaa</div>
+                <p class="tagline">Apna hamesha khayal rakhna, Love you so much!!!!</p>
+                
+                <div class="heart-divider">
+                    <div class="line"></div>
+                    <i class="fas fa-heart heart-animation"></i>
+                    <i class="fas fa-heart heart-animation" style="animation-delay: 0.2s"></i>
+                    <i class="fas fa-heart heart-animation" style="animation-delay: 0.4s"></i>
+                    <div class="line"></div>
+                </div>
+                
+                <p>Puchte Ho na mein hi kyu? Janlo</p>
+            </div>
+        </header>
+
+        <div class="buttons-container">
+            <button class="love-button" id="loveLetterBtn">
+                <i class="fas fa-envelope-open-text"></i>
+                Shabado se baya toh itna ache se nahi kar sakta lekin hain kuch.
+            </button>
+            
+            <button class="love-button" id="whyLoveBtn">
+                <i class="fas fa-heart-circle-check"></i>
+                Shukriya Madam jii
+            </button>
+        </div>
+
+        <!-- Hidden Love Letter (will appear when button is clicked) -->
+        <div class="hidden-message" id="loveLetter">
+            <h2><i class="fas fa-heart"></i>My Devi!! Myssshaa Swarg se aayi hui Parvati</h2>
+            Meraa baccchaaaa Myshhaa,</p>
+                <p>I love you so much more than anything in this world, you're the My deviii in my life you came into my life and everything changed. .</p>
+                <p>You ask always why you just,My Answer.</p>
+                <p>Mujhe un hazaro phoolo sirf kamal dikha tha. Us kamal ne mujhse jaise barish ko. Us kamal ki Sudarta itni hain, Mein tham gaya, Mein tham Gaya, Barish Tham Gaya us kamal ko dekhke itni khoobsurat hain woh kamal. Malmal, Nazuk, Masumiyat se bhara hua tha. Barish Ko thama diya, Inti sundarta hain Kamal mein. Mera Kamal ho aap.</p>
+                <p>Love you mera bacccccccccchaaaaaaaaa, Please apna khayal rakho karo!!!, time se khana khaya karo, zyada stress mat lo, Mein hoon na, Sab thik ho</p>
+                <p>I love you more than anything, I imagined as you as! And I would never get someone else like you, you loved me more than anyone, thank you come in my life, thank you be with me, thank you changed my life, thank you to loved me a lot!.</p>
+
+            <button class="close-btn" onclick="hideMessage('loveLetter')">
+                <i class="fas fa-times"></i> Close Letter
+            </button>
+        </div>
+
+        <!-- Hidden Why I Love You List (will appear when button is clicked) -->
+        <div class="hidden-message" id="whyLove">
+            <h2><i class="fas fa-star"></i>Thank you so much mera baccchaa</h2>
+            <ul class="love-list">
+                <li><i class="fas fa-heart"></i> Thank you so much!</li>
+                    <li><i class="fas fa-heart"></i> Sab ke liye</li>
+                    <li><i class="fas fa-heart"></i> Thank you so much life mein aane ke liye</li>
+                    <li><i class="fas fa-heart"></i> Mere sunsan raste mein kadam rakhne ke liye</li>
+                    <li><i class="fas fa-heart"></i> Mein chalakta hoon teri tasveer ko dekhke</li>
+                    <li><i class="fas fa-heart"></i> Mein chalakta hoon teri muskarahat ko dekhke</li>
+                    <li><i class="fas fa-heart"></i> Ab ache lagte ho</li>
+                    <li><i class="fas fa-heart"></i> Tum mujhe itne pyar se khayal rakhte ho</li>
+                    <li><i class="fas fa-heart"></i> Ache lagte ho!!!!</li>
+                </ul>
+            <button class="close-btn" onclick="hideMessage('Thank you')">
+                <i class="fas fa-times"></i> Close List
+            </button>
+        </div>
+
+        <div class="photo-gallery">
+            <div class="photo-frame">
+                <div class="photo-placeholder">
+                    <i class="fas fa-heart"></i>
+                </div>
+            </div>
+            <div class="photo-frame">
+                <div class="photo-placeholder">
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+            <div class="photo-frame">
+                <div class="photo-placeholder">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+            <div class="photo-frame">
+                <div class="photo-placeholder">
+                    <i class="fas fa-sun"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="countdown">
+            <h2><i class="fas fa-clock"></i> Counting My Love for You</h2>
+            <p>Every second my love for you grows stronger</p>
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div class="number" id="days">0</div>
+                    <div class="label">Days Loved</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="number" id="hours">0</div>
+                    <div class="label">Hours Admired</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="number" id="minutes">0</div>
+                    <div class="label">Minutes Cherished</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="number" id="seconds">0</div>
+                    <div class="label">Seconds Adored</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <h2>Mein hamesha rahunga</h2>
+            <p>Mein har pal, Har kadam,Har subah tere sath Bitauga, Tu sab meri hain, Sochne se pehle Moksh paalunga ki dur bhi jaau tere se. Tu Hi mera chand tu hi sab kuch. Love you much!!!!.</p>
+            
+            <div class="heart-divider">
+                <div class="line"></div>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <i class="fas fa-heart"></i>
+                <div class="line"></div>
+            </div>
+            
+            <p class="signature">Mera bacccchaaaaa Myyyyyyyyshhhaaa!!!!!!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Set the date from when you've loved her (change this to your actual date)
+        const loveStartDate = new Date("2023-01-01").getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeSince = now - loveStartDate;
+            
+            const days = Math.floor(timeSince / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeSince % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeSince % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeSince % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = days;
+            document.getElementById("hours").innerHTML = hours;
+            document.getElementById("minutes").innerHTML = minutes;
+            document.getElementById("seconds").innerHTML = seconds;
+        }
+        
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Show/hide message functions
+        function showMessage(messageId) {
+            // First hide any currently open messages
+            const allMessages = document.querySelectorAll('.hidden-message');
+            allMessages.forEach(msg => {
+                msg.style.display = 'none';
+            });
+            
+            // Show the selected message
+            const message = document.getElementById(messageId);
+            if (message) {
+                message.style.display = 'block';
+                
+                // Scroll to the message smoothly
+                message.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Add floating hearts effect
+                createHeartsCelebration();
+            }
+        }
+        
+        function hideMessage(messageId) {
+            const message = document.getElementById(messageId);
+            if (message) {
+                message.style.display = 'none';
+            }
+        }
+        
+        // Add event listeners to buttons
+        document.getElementById('loveLetterBtn').addEventListener('click', function() {
+            showMessage('loveLetter');
+        });
+        
+        document.getElementById('whyLoveBtn').addEventListener('click', function() {
+            showMessage('whyLove');
+        });
+        
+        // Special message when clicking on her name
+        document.querySelector('.name').addEventListener('click', function() {
+            alert("Myshhaa, you mean everything to me! I love you more than anything in this universe! ❤️");
+        });
+        
+        // Create floating hearts celebration
+        function createHeartsCelebration() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createHeart();
+                }, i * 100);
+            }
+        }
+        
+        // Create a single floating heart
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            heart.style.color = getRandomColor();
+            heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '9999';
+            heart.style.opacity = '0.9';
+            
+            // Add animation
+            const animationDuration = Math.random() * 3 + 2;
+            heart.style.animation = `floatUp ${animationDuration}s ease-out forwards`;
+            
+            document.body.appendChild(heart);
+            
+            // Remove heart after animation
+            setTimeout(() => {
+                if (heart.parentNode) {
+                    heart.remove();
+                }
+            }, animationDuration * 1000);
+        }
+        
+        // Get random romantic color
+        function getRandomColor() {
+            const colors = ['#ff4081', '#e91e63', '#f06292', '#ec407a', '#d81b60'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // Add CSS for float animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes floatUp {
+                0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.9; }
+                100% { transform: translateY(-100vh) rotate(360deg) scale(0.2); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Add click anywhere hearts (original feature)
+        document.addEventListener('click', function(e) {
+            // Only create hearts if not clicking on buttons or close buttons
+            if (!e.target.closest('.love-button') && !e.target.closest('.close-btn')) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.style.position = 'fixed';
+                heart.style.left = e.clientX + 'px';
+                heart.style.top = e.clientY + 'px';
+                heart.style.color = '#ff4081';
+                heart.style.fontSize = '25px';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '9999';
+                heart.style.animation = 'heartFloat 2s ease-out forwards';
+                
+                // Add CSS for animation
+                const heartStyle = document.createElement('style');
+                heartStyle.innerHTML = `
+                    @keyframes heartFloat {
+                        0% { transform: translateY(0) scale(1); opacity: 1; }
+                        100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(heartStyle);
+                
+                document.body.appendChild(heart);
+                
+                // Remove heart after animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
